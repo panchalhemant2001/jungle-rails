@@ -13,6 +13,10 @@ class OrdersController < ApplicationController
     if order.valid?
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
+
+      # sending email using letter_opener
+      # to check the inbox for letter_opener, http://localhost:3000/letter_opener
+      NotificationMailer.notification_mailer(user_email: current_user.email, subject: "Order Receipt - Order Number: #{order.id}", order: order, cart: cart).deliver_now
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end
