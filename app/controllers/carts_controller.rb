@@ -1,8 +1,11 @@
 class CartsController < ApplicationController
 
   before_filter :authorize
-  
+
   def show
+    if cart.size <= 0
+      redirect_to '/'
+    end
   end
 
   def add_item

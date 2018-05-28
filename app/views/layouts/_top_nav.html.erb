@@ -39,11 +39,23 @@
             <li><%= link_to 'Categories',  [:admin, :categories] %></li>
           </ul>
         </li>
+
+      <%
+        if cart.size > 0
+      %>
+
         <li>
-          <%= link_to cart_path do %>
-            <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
-          <% end %>
+              <%= link_to cart_path do %>
+                <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
+              <% end %>
         </li>
+      <% else %>
+        <li>
+              <%= link_to '/' do %>
+                <%= fa_icon "shopping-cart" %> Empty Cart (<%= cart.size %>)
+              <% end %>
+        </li>
+      <% end %>
         <li>
           <div class='navbar-brand'>
             <% if current_user %>
